@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+
+// Screens
+import './screens/loginScreen.dart';
+
+// Constants
 import './constants/colors.dart';
 
 void main() {
@@ -71,7 +76,10 @@ class WelcomeScreen extends StatelessWidget {
                       FittedBox(
                           child: GestureDetector(
                         onTap: () {
-                          print('123');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginScreen()));
                         },
                         child: Container(
                           decoration: BoxDecoration(
