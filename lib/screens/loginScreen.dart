@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 // constants
 import '../constants/colors.dart';
@@ -11,6 +12,21 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<LoginScreen> {
+  logToast(
+    String toastContent,
+    Color backgroundColors,
+    Color textColors,
+  ) {
+    Fluttertoast.showToast(
+        msg: toastContent,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: backgroundColors,
+        textColor: textColors != null ? textColors : Colors.white,
+        fontSize: 16.0);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,9 +58,16 @@ class LoginScreenState extends State<LoginScreen> {
                                 color: Colors.white,
                                 fontSize: 45),
                           ),
-                          Text('SIGN UP',
-                              style:
-                                  TextStyle(color: primaryColor, fontSize: 18))
+                          Container(
+                            child: GestureDetector(
+                              onTap: () {
+                                logToast('SIGN UP', primaryColor, Colors.black);
+                              },
+                              child: Text('SIGN UP',
+                                  style: TextStyle(
+                                      color: primaryColor, fontSize: 18)),
+                            ),
+                          ),
                         ],
                       )),
                   Spacer(flex: 2),
@@ -120,7 +143,8 @@ class LoginScreenState extends State<LoginScreen> {
                       child: Row(children: <Widget>[
                         GestureDetector(
                           onTap: () {
-                            print('login with facebook');
+                            logToast('Login with Facebook',
+                                Colors.blueAccent[700], null);
                           },
                           child: Container(
                             padding: EdgeInsets.all(16),
@@ -142,7 +166,8 @@ class LoginScreenState extends State<LoginScreen> {
                         SizedBox(width: 10),
                         GestureDetector(
                           onTap: () {
-                            print('login with google');
+                            logToast(
+                                'Login with Google', Colors.red[500], null);
                           },
                           child: Container(
                             padding: EdgeInsets.all(16),
@@ -163,7 +188,7 @@ class LoginScreenState extends State<LoginScreen> {
                         Spacer(),
                         GestureDetector(
                           onTap: () {
-                            print('signin');
+                            logToast('SIGN IN', primaryColor, Colors.black);
                           },
                           child: Container(
                             padding: EdgeInsets.all(16),
