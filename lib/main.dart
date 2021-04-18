@@ -1,119 +1,59 @@
+import 'package:WelcomeAndLoginScreen/bindings/LoginBinding.dart';
+import 'package:WelcomeAndLoginScreen/bindings/SplashBinding.dart';
+import 'package:WelcomeAndLoginScreen/controllers/LoginController.dart';
+import 'package:WelcomeAndLoginScreen/demoGetX.dart';
+import 'package:WelcomeAndLoginScreen/screens/SplashScreen.dart';
+import 'package:WelcomeAndLoginScreen/screens/loginScreen.dart';
+import 'package:WelcomeAndLoginScreen/widgets/buttons/ButtonTextIcon.dart';
 import 'package:flutter/material.dart';
-
-// Screens
-import './screens/loginScreen.dart';
+import 'package:get/get.dart';
 
 // Constants
 import './constants/colors.dart';
 
 void main() {
-  runApp(MyApp());
+  // runApp(MyApp());
+  runApp(GetMaterialApp(
+      // It is not mandatory to use named routes, but dynamic urls are interesting.
+      initialRoute: '/SplashScreen',
+      defaultTransition: Transition.native,
+      translations: MyTranslations(),
+      locale: Locale('pt', 'BR'),
+      getPages: [
+        GetPage(
+            name: '/SplashScreen',
+            page: () => SplashScreen(),
+            binding: SplashBinding()),
+        GetPage(
+            name: '/LoginScreen',
+            page: () => LoginScreen(),
+            binding: LoginBinding())
+      ]));
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or simply save your changes to "hot reload" in a Flutter IDE).
-          // Notice that the counter didn't reset back to zero; the application
-          // is not restarted.
-          primarySwatch: Colors.blue,
-          // This makes the visual density adapt to the platform that you run
-          // the app on. For desktop platforms, the controls will be smaller and
-          // closer together (more dense) than on mobile platforms.
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          textTheme: TextTheme(
-            button: TextStyle(color: primaryColor),
-            display1:
-                TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          )),
-      home: WelcomeScreen(),
-    );
-  }
-}
-
-class WelcomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: backgroundColor,
-        child: Column(
-          children: [
-            Expanded(
-                flex: 2,
-                child: Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage('assets/background.jpg'))),
-                )),
-            Expanded(
-                flex: 1,
-                child: Container(
-                  color: backgroundColor,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(children: <TextSpan>[
-                            TextSpan(
-                                text: 'Welcome and Login\n',
-                                style: Theme.of(context).textTheme.display1),
-                            TextSpan(
-                                text: "CREATE WELCOME AND LOGIN WITH FLUTTER")
-                          ])),
-                      FittedBox(
-                          child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoginScreen()));
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: primaryColor,
-                          ),
-                          margin: EdgeInsets.only(bottom: 25),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 26, vertical: 16),
-                          child: Row(
-                            children: [
-                              RichText(
-                                  text: TextSpan(children: <TextSpan>[
-                                TextSpan(
-                                    text: 'START LOGIN',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold))
-                              ])),
-                              SizedBox(width: 10),
-                              Icon(
-                                Icons.arrow_forward,
-                                color: Colors.black,
-                              )
-                            ],
-                          ),
-                        ),
-                      ))
-                    ],
-                  ),
-                )),
-          ],
-        ),
-      ),
-    );
-  }
-}
+// void main() {
+//   runApp(GetMaterialApp(
+//     // It is not mandatory to use named routes, but dynamic urls are interesting.
+//     initialRoute: '/home',
+//     defaultTransition: Transition.native,
+//     translations: MyTranslations(),
+//     locale: Locale('pt', 'BR'),
+//     getPages: [
+//       //Simple GetPage
+//       GetPage(name: '/home', page: () => First()),
+//       // GetPage with custom transitions and bindings
+//       GetPage(
+//         name: '/second',
+//         page: () => Second(),
+//         customTransition: SizeTransitions(),
+//         binding: SampleBind(),
+//       ),
+//       // GetPage with default transitions
+//       GetPage(
+//         name: '/third',
+//         transition: Transition.cupertino,
+//         page: () => Third(),
+//       ),
+//     ],
+//   ));
+// }
